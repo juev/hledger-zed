@@ -42,7 +42,10 @@ impl HledgerExtension {
         let version_dir = format!("hledger-lsp-{}", release.version);
         let binary_path = format!("{version_dir}/{binary_name}");
 
-        if !fs::metadata(&binary_path).map(|m| m.is_file()).unwrap_or(false) {
+        if !fs::metadata(&binary_path)
+            .map(|m| m.is_file())
+            .unwrap_or(false)
+        {
             zed::set_language_server_installation_status(
                 language_server_id,
                 &zed::LanguageServerInstallationStatus::Downloading,
