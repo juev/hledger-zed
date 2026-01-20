@@ -44,7 +44,7 @@
 (note) @comment
 
 ; Account names
-(account) @variable
+(account) @property
 
 ; Amounts and numbers
 (quantity) @number
@@ -83,7 +83,6 @@
 ] @punctuation.bracket
 
 ";" @punctuation.delimiter
-"#" @punctuation.delimiter
 
 ; Error nodes
 (ERROR) @error
