@@ -2,3 +2,5 @@
 Cargo.lock
 grammars/
 extension.wasm
+
+!CLAUDE.md
