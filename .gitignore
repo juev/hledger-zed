@@ -1,6 +1,6 @@
 /target
 Cargo.lock
-grammars/
 extension.wasm
 
 !CLAUDE.md
+grammars/

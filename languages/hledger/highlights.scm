@@ -1,71 +1,78 @@
-; Keywords and directives
+; Directives
 [
   "account"
-  "commodity"
-  "P"
-  "include"
   "alias"
+  "assert"
+  "check"
+  "commodity"
+  "comment"
+  "def"
+  "default"
+  "end"
+  "eval"
+  "format"
+  "nomarket"
+  "note"
   "payee"
-  "tag"
-  "decimal-mark"
+  "test"
+  "A"
+  "Y"
+  "N"
+  "D"
+  "C"
+  "P"
 ] @keyword
 
-; Date components
-(date) @constant.numeric
+"include" @keyword.import
 
-; Transaction status markers
+; Dates
+(date) @string.special
+(effective_date) @string.special
+(time) @string.special
+(interval) @string.special
+
+; Transaction status markers (* and !)
 (status) @attribute
 
 ; Transaction code (in parentheses)
 (code) @string.special
 
-; Description/payee text
-(description) @string
+; Transaction payee/description
+(payee) @string
+
+; Notes
+(note) @comment
 
 ; Account names
 (account) @variable
 
-; Virtual accounts (in parentheses or brackets)
-(posting "(" (account) @variable.special ")")
-(posting "[" (account) @variable.special "]")
-
 ; Amounts and numbers
-(amount) @constant.numeric
+(quantity) @number
+(negative_quantity) @number
 
 ; Commodities (currency symbols and codes)
 (commodity) @type
 
 ; Comments
-[
-  (comment)
-  (comment_line)
-] @comment
+(comment) @comment
+(block_comment) @comment
 
 ; Balance assertions
 (balance_assertion) @operator
-(balance_assertion (amount) @constant.numeric)
 
 ; Cost/price specifications
-(cost_spec) @operator
-(cost_spec (amount) @constant.numeric)
+(price) @operator
+(lot_price) @operator
 
-; Periodic transaction marker and intervals
+; Periodic transaction marker
 "~" @keyword.repeat
-[
-  "daily"
-  "weekly"
-  "monthly"
-  "quarterly"
-  "yearly"
-] @keyword.repeat
+
+; Automated transaction marker
+"=" @keyword
 
 ; Operators
-[
-  "="
-  "=="
-  "@"
-  "@@"
-] @operator
+"@" @operator
+"@@" @operator
 
 ; Punctuation
 [

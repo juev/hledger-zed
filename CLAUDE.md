@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Zed editor extension for hledger journal files. Provides syntax highlighting via tree-sitter-hledger and LSP support via hledger-lsp.
+Zed editor extension for hledger journal files. Provides syntax highlighting via tree-sitter-ledger and LSP support via hledger-lsp.
 
 ## Build Commands
 
@@ -32,7 +32,7 @@ Prerequisites: Rust with wasm32-wasip1 target (`rustup target add wasm32-wasip1`
 - `brackets.scm` - bracket matching
 - `outline.scm` - document outline for transactions
 
-**Extension manifest:** `extension.toml` - declares language server config and grammar source (tree-sitter-hledger)
+**Extension manifest:** `extension.toml` - declares language server config and grammar source (tree-sitter-ledger)
 
 ## Testing Locally
 

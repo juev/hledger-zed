@@ -1,4 +1,12 @@
-; Transaction entries with date and description
-(transaction
+; Plain transactions with date and payee
+(plain_xact
   (date) @context
-  (description) @name) @item
+  (payee) @name) @item
+
+; Periodic transactions with interval
+(periodic_xact
+  (interval) @name) @item
+
+; Automated transactions with query
+(automated_xact
+  (query) @name) @item

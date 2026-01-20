@@ -10,6 +10,6 @@ repository = "https://github.com/juev/hledger-zed"
 name = "hledger-lsp"
 languages = ["hledger"]
 
-[grammars.hledger]
-repository = "https://github.com/chrislloyd/tree-sitter-hledger"
-rev = "75bfaa6acb76d99a7e130feaf5cd9d12e7dcba37"
+[grammars.ledger]
+repository = "https://github.com/cbarrete/tree-sitter-ledger"
+rev = "96c92d4908a836bf8f661166721c98439f8afb80"
