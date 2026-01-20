@@ -1,0 +1,6 @@
+name = "hledger"
+grammar = "hledger"
+path_suffixes = ["journal", "hledger", "ledger"]
+line_comments = [";", "#"]
+tab_size = 4
+hard_tabs = false

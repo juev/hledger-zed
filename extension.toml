@@ -1,0 +1,15 @@
+id = "hledger"
+name = "hledger"
+version = "0.1.0"
+schema_version = 1
+authors = ["Denis Evsyukov <denis@evsyukov.org>"]
+description = "hledger journal support with LSP integration"
+repository = "https://github.com/juev/hledger-zed"
+
+[language_servers.hledger-lsp]
+name = "hledger-lsp"
+languages = ["hledger"]
+
+[grammars.hledger]
+repository = "https://github.com/chrislloyd/tree-sitter-hledger"
+rev = "75bfaa6acb76d99a7e130feaf5cd9d12e7dcba37"
