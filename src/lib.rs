@@ -11,12 +11,6 @@ impl HledgerExtension {
         language_server_id: &LanguageServerId,
         worktree: &zed::Worktree,
     ) -> Result<String> {
-        if let Some(path) = &self.cached_binary_path {
-            if fs::metadata(path).map(|m| m.is_file()).unwrap_or(false) {
-                return Ok(path.clone());
-            }
-        }
-
         if let Some(path) = worktree.which("hledger-lsp") {
             self.cached_binary_path = Some(path.clone());
             return Ok(path);
@@ -25,44 +19,55 @@ impl HledgerExtension {
         let (platform, arch) = zed::current_platform();
         let binary_name = Self::binary_name(platform, arch)?;
 
-        let release = zed::latest_github_release(
+        match zed::latest_github_release(
             "juev/hledger-lsp",
             zed::GithubReleaseOptions {
                 require_assets: true,
                 pre_release: false,
             },
-        )?;
+        ) {
+            Ok(release) => {
+                let asset = release
+                    .assets
+                    .iter()
+                    .find(|asset| asset.name == binary_name)
+                    .ok_or_else(|| format!("no asset found for {binary_name}"))?;
 
-        let asset = release
-            .assets
-            .iter()
-            .find(|asset| asset.name == binary_name)
-            .ok_or_else(|| format!("no asset found for {binary_name}"))?;
+                let version_dir = format!("hledger-lsp-{}", release.version);
+                let binary_path = format!("{version_dir}/{binary_name}");
 
-        let version_dir = format!("hledger-lsp-{}", release.version);
-        let binary_path = format!("{version_dir}/{binary_name}");
+                if !fs::metadata(&binary_path)
+                    .map(|m| m.is_file())
+                    .unwrap_or(false)
+                {
+                    zed::set_language_server_installation_status(
+                        language_server_id,
+                        &zed::LanguageServerInstallationStatus::Downloading,
+                    );
 
-        if !fs::metadata(&binary_path)
-            .map(|m| m.is_file())
-            .unwrap_or(false)
-        {
-            zed::set_language_server_installation_status(
-                language_server_id,
-                &zed::LanguageServerInstallationStatus::Downloading,
-            );
+                    zed::download_file(
+                        &asset.download_url,
+                        &binary_path,
+                        zed::DownloadedFileType::Uncompressed,
+                    )
+                    .map_err(|e| format!("failed to download hledger-lsp: {e}"))?;
 
-            zed::download_file(
-                &asset.download_url,
-                &binary_path,
-                zed::DownloadedFileType::Uncompressed,
-            )
-            .map_err(|e| format!("failed to download hledger-lsp: {e}"))?;
+                    zed::make_file_executable(&binary_path)?;
+                }
 
-            zed::make_file_executable(&binary_path)?;
+                self.cached_binary_path = Some(binary_path.clone());
+                Ok(binary_path)
+            }
+            Err(_) => {
+                if let Some(path) = &self.cached_binary_path {
+                    if fs::metadata(path).map(|m| m.is_file()).unwrap_or(false) {
+                        return Ok(path.clone());
+                    }
+                }
+                Err("failed to fetch latest hledger-lsp release and no cached binary available"
+                    .into())
+            }
         }
-
-        self.cached_binary_path = Some(binary_path.clone());
-        Ok(binary_path)
     }
 
     fn binary_name(platform: zed::Os, arch: zed::Architecture) -> Result<String> {
