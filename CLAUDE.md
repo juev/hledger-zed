@@ -36,6 +36,7 @@ Prerequisites: Rust with wasm32-wasip1 target (`rustup target add wasm32-wasip1`
 
 ## Testing Locally
 
-1. Build the extension
-2. Zed → Extensions → Install Dev Extension → select this directory
-3. Open a `.journal` file
+1. Remove `grammars/` directory from the repository root (`rm -rf grammars`) — Zed will not install the dev extension if it exists
+2. Build the extension
+3. Zed → Extensions → Install Dev Extension → select this directory
+4. Open a `.journal` file
