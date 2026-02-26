@@ -1,6 +1,6 @@
 id = "hledger"
 name = "hledger"
-version = "0.1.0"
+version = "0.1.1"
 schema_version = 1
 authors = ["Denis Evsyukov <denis@evsyukov.org>"]
 description = "Plain-text accounting with hledger: syntax highlighting and LSP support"
