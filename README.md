@@ -11,6 +11,7 @@ Zed extension for [hledger](https://hledger.org/) journal files with LSP integra
   - Diagnostics for unbalanced transactions
   - Go to definition
   - Document formatting
+  - Semantic tokens for enhanced highlighting
 
 ## Installation
 
@@ -77,6 +78,44 @@ Configure the LSP in your Zed `settings.json`:
         }
       }
     }
+  }
+}
+```
+
+## Semantic Tokens
+
+hledger-lsp provides semantic tokens for enhanced syntax highlighting beyond tree-sitter. Zed does not enable semantic tokens by default — add the following to your `settings.json`:
+
+```json
+{
+  "languages": {
+    "hledger": {
+      "semantic_tokens": "combined"
+    }
+  }
+}
+```
+
+The `"combined"` mode uses tree-sitter as the base layer with semantic tokens overlaid on top. Use `"full"` to rely solely on semantic tokens (requires hledger-lsp to be running).
+
+hledger-lsp uses custom token types that need explicit mapping to theme colors. Add `semantic_token_rules` to your `settings.json`:
+
+```json
+{
+  "global_lsp_settings": {
+    "semantic_token_rules": [
+      { "token_type": "account", "style": ["variable"] },
+      { "token_type": "commodity", "style": ["constant"] },
+      { "token_type": "payee", "style": ["string"] },
+      { "token_type": "date", "style": ["number"] },
+      { "token_type": "amount", "style": ["number"] },
+      { "token_type": "directive", "style": ["keyword"] },
+      { "token_type": "tag", "style": ["label"] },
+      { "token_type": "status", "style": ["operator"] },
+      { "token_type": "code", "style": ["string"] },
+      { "token_type": "note", "style": ["comment"] },
+      { "token_type": "comment", "style": ["comment"] }
+    ]
   }
 }
 ```

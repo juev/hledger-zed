@@ -34,6 +34,8 @@ Prerequisites: Rust with wasm32-wasip1 target (`rustup target add wasm32-wasip1`
 
 **Extension manifest:** `extension.toml` - declares language server config and grammar source (tree-sitter-ledger)
 
+**Semantic tokens:** hledger-lsp provides 18 custom token types. Zed does not allow extensions to enable semantic tokens or bundle token rules — users must configure `semantic_tokens` and `semantic_token_rules` in their `settings.json` manually (see README).
+
 ## Testing Locally
 
 1. Remove `grammars/` directory from the repository root (`rm -rf grammars`) — Zed will not install the dev extension if it exists
