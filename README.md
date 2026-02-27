@@ -4,14 +4,14 @@ Zed extension for [hledger](https://hledger.org/) journal files with LSP integra
 
 ## Features
 
-- Syntax highlighting via [tree-sitter-hledger](https://github.com/chrislloyd/tree-sitter-hledger)
 - LSP support via [hledger-lsp](https://github.com/juev/hledger-lsp):
+  - Syntax highlighting via semantic tokens
   - Autocompletion for accounts and commodities
   - Hover information
   - Diagnostics for unbalanced transactions
   - Go to definition
   - Document formatting
-  - Semantic tokens for enhanced highlighting
+- Support for `.journal`, `.hledger`, `.ledger`, and `.rules` files
 
 ## Installation
 
@@ -84,19 +84,20 @@ Configure the LSP in your Zed `settings.json`:
 
 ## Semantic Tokens
 
-hledger-lsp provides semantic tokens for enhanced syntax highlighting beyond tree-sitter. Zed does not enable semantic tokens by default — add the following to your `settings.json`:
+Syntax highlighting is provided entirely by hledger-lsp semantic tokens. Zed does not enable semantic tokens by default — add the following to your `settings.json`:
 
 ```json
 {
   "languages": {
     "hledger": {
-      "semantic_tokens": "combined"
+      "semantic_tokens": "full"
+    },
+    "hledger-rules": {
+      "semantic_tokens": "full"
     }
   }
 }
 ```
-
-The `"combined"` mode uses tree-sitter as the base layer with semantic tokens overlaid on top. Use `"full"` to rely solely on semantic tokens (requires hledger-lsp to be running).
 
 hledger-lsp uses custom token types that need explicit mapping to theme colors. Add `semantic_token_rules` to your `settings.json`:
 
@@ -104,7 +105,7 @@ hledger-lsp uses custom token types that need explicit mapping to theme colors. 
 {
   "global_lsp_settings": {
     "semantic_token_rules": [
-      { "token_type": "account", "style": ["variable"] },
+      { "token_type": "account", "style": ["constant"] },
       { "token_type": "commodity", "style": ["constant"] },
       { "token_type": "payee", "style": ["string"] },
       { "token_type": "date", "style": ["number"] },
@@ -125,6 +126,7 @@ hledger-lsp uses custom token types that need explicit mapping to theme colors. 
 - `.journal`
 - `.hledger`
 - `.ledger`
+- `.rules` (CSV import rules)
 
 ## Development
 
