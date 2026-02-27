@@ -8,4 +8,4 @@ repository = "https://github.com/juev/hledger-zed"
 
 [language_servers.hledger-lsp]
 name = "hledger-lsp"
-languages = ["hledger"]
+languages = ["hledger", "hledger-rules"]
