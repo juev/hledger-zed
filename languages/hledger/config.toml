@@ -1,5 +1,4 @@
 name = "hledger"
-grammar = "ledger"
 path_suffixes = ["journal", "hledger", "ledger"]
 line_comments = [";", "#"]
 tab_size = 4
