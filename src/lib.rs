@@ -64,8 +64,10 @@ impl HledgerExtension {
                         return Ok(path.clone());
                     }
                 }
-                Err("failed to fetch latest hledger-lsp release and no cached binary available"
-                    .into())
+                Err(
+                    "failed to fetch latest hledger-lsp release and no cached binary available"
+                        .into(),
+                )
             }
         }
     }
