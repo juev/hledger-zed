@@ -84,7 +84,9 @@ Configure the LSP in your Zed `settings.json`:
 
 ## Semantic Tokens
 
-Syntax highlighting is provided entirely by hledger-lsp semantic tokens. Zed does not enable semantic tokens by default — add the following to your `settings.json`:
+Syntax highlighting is provided entirely by hledger-lsp semantic tokens. hledger-lsp uses standard LSP token types, so highlighting works out of the box with any Zed theme.
+
+Zed does not enable semantic tokens by default — add the following to your `settings.json`:
 
 ```json
 {
@@ -95,28 +97,6 @@ Syntax highlighting is provided entirely by hledger-lsp semantic tokens. Zed doe
     "hledger-rules": {
       "semantic_tokens": "full"
     }
-  }
-}
-```
-
-hledger-lsp uses custom token types that need explicit mapping to theme colors. Add `semantic_token_rules` to your `settings.json`:
-
-```json
-{
-  "global_lsp_settings": {
-    "semantic_token_rules": [
-      { "token_type": "account", "style": ["constant"] },
-      { "token_type": "commodity", "style": ["constant"] },
-      { "token_type": "payee", "style": ["string"] },
-      { "token_type": "date", "style": ["number"] },
-      { "token_type": "amount", "style": ["number"] },
-      { "token_type": "directive", "style": ["keyword"] },
-      { "token_type": "tag", "style": ["label"] },
-      { "token_type": "status", "style": ["operator"] },
-      { "token_type": "code", "style": ["string"] },
-      { "token_type": "note", "style": ["comment"] },
-      { "token_type": "comment", "style": ["comment"] }
-    ]
   }
 }
 ```
