@@ -59,21 +59,40 @@ Configure the LSP in your Zed `settings.json`:
             "hover": true,
             "completion": true,
             "formatting": true,
-            "diagnostics": true
+            "diagnostics": true,
+            "semanticTokens": true,
+            "codeActions": true,
+            "foldingRanges": true,
+            "documentLinks": true,
+            "workspaceSymbol": true,
+            "inlineCompletion": true,
+            "codeLens": false
           },
           "completion": {
             "maxResults": 50,
-            "snippets": true,
-            "fuzzyMatching": true
+            "fuzzyMatching": true,
+            "showCounts": true,
+            "includeNotes": true
           },
           "diagnostics": {
             "undeclaredAccounts": true,
             "undeclaredCommodities": true,
-            "unbalancedTransactions": true
+            "unbalancedTransactions": true,
+            "balanceTolerance": 0.0
           },
           "formatting": {
             "indentSize": 4,
-            "alignAmounts": true
+            "alignAmounts": true,
+            "minAlignmentColumn": 40
+          },
+          "cli": {
+            "enabled": true,
+            "path": "hledger",
+            "timeout": 30000
+          },
+          "limits": {
+            "maxFileSizeBytes": 10485760,
+            "maxIncludeDepth": 50
           }
         }
       }
@@ -81,6 +100,65 @@ Configure the LSP in your Zed `settings.json`:
   }
 }
 ```
+
+### Settings Reference
+
+#### Features
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `features.hover` | `true` | Hover information |
+| `features.completion` | `true` | Completions |
+| `features.formatting` | `true` | Document formatting |
+| `features.diagnostics` | `true` | Diagnostics |
+| `features.semanticTokens` | `true` | Semantic tokens |
+| `features.codeActions` | `true` | Code actions |
+| `features.foldingRanges` | `true` | Folding ranges for transactions and directives |
+| `features.documentLinks` | `true` | Clickable links for include directives |
+| `features.workspaceSymbol` | `true` | Workspace symbol search |
+| `features.inlineCompletion` | `true` | Ghost text completions for transaction templates |
+| `features.codeLens` | `false` | Balance check indicators on transactions |
+
+#### Completion
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `completion.maxResults` | `50` | Maximum number of completion items |
+| `completion.fuzzyMatching` | `true` | Enable fuzzy matching |
+| `completion.showCounts` | `true` | Show usage counts in completion details |
+| `completion.includeNotes` | `true` | Include notes in payee completions |
+
+#### Diagnostics
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `diagnostics.undeclaredAccounts` | `true` | Report undeclared accounts |
+| `diagnostics.undeclaredCommodities` | `true` | Report undeclared commodities |
+| `diagnostics.unbalancedTransactions` | `true` | Report unbalanced transactions |
+| `diagnostics.balanceTolerance` | `0.0` | Tolerance for balance checks (0 = exact) |
+
+#### Formatting
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `formatting.indentSize` | `4` | Number of spaces for posting indent |
+| `formatting.alignAmounts` | `true` | Align amounts across postings |
+| `formatting.minAlignmentColumn` | `40` | Minimum column for amount alignment (0 = auto) |
+
+#### CLI
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `cli.enabled` | `true` | Enable hledger CLI integration |
+| `cli.path` | `"hledger"` | Path to hledger executable |
+| `cli.timeout` | `30000` | CLI command timeout in milliseconds |
+
+#### Limits
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `limits.maxFileSizeBytes` | `10485760` | Maximum journal file size (bytes) |
+| `limits.maxIncludeDepth` | `50` | Maximum include depth for recursive loading |
 
 ## Semantic Tokens
 

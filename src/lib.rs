@@ -1,5 +1,5 @@
 use std::fs;
-use zed_extension_api::{self as zed, LanguageServerId, Result};
+use zed_extension_api::{self as zed, settings::LspSettings, LanguageServerId, Result};
 
 struct HledgerExtension {
     cached_binary_path: Option<String>,
@@ -121,6 +121,28 @@ impl zed::Extension for HledgerExtension {
             args: vec![],
             env: worktree.shell_env(),
         })
+    }
+
+    fn language_server_initialization_options(
+        &mut self,
+        _language_server_id: &LanguageServerId,
+        worktree: &zed::Worktree,
+    ) -> Result<Option<zed::serde_json::Value>> {
+        let settings = LspSettings::for_worktree("hledger-lsp", worktree)
+            .ok()
+            .and_then(|s| s.initialization_options);
+        Ok(settings)
+    }
+
+    fn language_server_workspace_configuration(
+        &mut self,
+        _language_server_id: &LanguageServerId,
+        worktree: &zed::Worktree,
+    ) -> Result<Option<zed::serde_json::Value>> {
+        let settings = LspSettings::for_worktree("hledger-lsp", worktree)
+            .ok()
+            .and_then(|s| s.settings);
+        Ok(settings)
     }
 }
 
