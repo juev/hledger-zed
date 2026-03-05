@@ -33,6 +33,16 @@ Prerequisites: Rust with wasm32-wasip1 target (`rustup target add wasm32-wasip1`
 
 **Semantic tokens:** Syntax highlighting is provided entirely by hledger-lsp semantic tokens (standard LSP token types). Users must enable `semantic_tokens` in their `settings.json` (see README).
 
+## Pre-commit Checks
+
+Before every commit, run:
+
+```bash
+cargo fmt --check && cargo check --target wasm32-wasip1
+```
+
+Fix any issues before committing. Do not skip these checks.
+
 ## Testing Locally
 
 1. Build the extension
