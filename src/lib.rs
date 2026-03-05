@@ -45,9 +45,8 @@ impl HledgerExtension {
                         &zed::LanguageServerInstallationStatus::Downloading,
                     );
 
-                    fs::create_dir_all(&version_dir).map_err(|e| {
-                        format!("failed to create directory '{version_dir}': {e}")
-                    })?;
+                    fs::create_dir_all(&version_dir)
+                        .map_err(|e| format!("failed to create directory '{version_dir}': {e}"))?;
 
                     zed::download_file(
                         &asset.download_url,
