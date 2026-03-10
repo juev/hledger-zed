@@ -6,6 +6,10 @@ authors = ["Denis Evsyukov <denis@evsyukov.org>"]
 description = "Plain-text accounting with hledger: syntax highlighting and LSP support"
 repository = "https://github.com/juev/hledger-zed"
 
+[grammars.ledger]
+repository = "https://github.com/cbarrete/tree-sitter-ledger"
+rev = "96c92d4908a836bf8f661166721c98439f8afb80"
+
 [language_servers.hledger-lsp]
 name = "hledger-lsp"
 languages = ["hledger", "hledger-rules"]

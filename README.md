@@ -160,11 +160,11 @@ Configure the LSP in your Zed `settings.json`:
 | `limits.maxFileSizeBytes` | `10485760` | Maximum journal file size (bytes) |
 | `limits.maxIncludeDepth` | `50` | Maximum include depth for recursive loading |
 
-## Semantic Tokens
+## Syntax Highlighting
 
-Syntax highlighting is provided entirely by hledger-lsp semantic tokens. hledger-lsp uses standard LSP token types, so highlighting works out of the box with any Zed theme.
+Basic syntax highlighting is provided by the built-in tree-sitter grammar and works out of the box with any Zed theme — no LSP required.
 
-Zed does not enable semantic tokens by default — add the following to your `settings.json`:
+For enhanced highlighting, enable semantic tokens from hledger-lsp by adding the following to your `settings.json`:
 
 ```json
 {

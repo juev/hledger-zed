@@ -31,7 +31,7 @@ Prerequisites: Rust with wasm32-wasip1 target (`rustup target add wasm32-wasip1`
 
 **Extension manifest:** `extension.toml` - declares language server config, hledger-lsp serves both languages
 
-**Semantic tokens:** Syntax highlighting is provided entirely by hledger-lsp semantic tokens (standard LSP token types). Users must enable `semantic_tokens` in their `settings.json` (see README).
+**Syntax highlighting:** Basic highlighting via tree-sitter grammar (`cbarrete/tree-sitter-ledger`). Enhanced highlighting via hledger-lsp semantic tokens (optional, requires `semantic_tokens` setting in `settings.json`).
 
 ## Pre-commit Checks
 
