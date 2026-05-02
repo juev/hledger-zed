@@ -30,7 +30,11 @@ Zed extension for [hledger](https://hledger.org/) journal files with LSP integra
 
 ## LSP Binary
 
-The extension automatically downloads `hledger-lsp` from [GitHub Releases](https://github.com/juev/hledger-lsp/releases) when needed.
+The extension resolves `hledger-lsp` in this order:
+
+1. A path configured with `lsp.hledger-lsp.binary.path` in your Zed settings
+2. The latest `hledger-lsp` binary from [GitHub Releases](https://github.com/juev/hledger-lsp/releases)
+3. A cached binary or `hledger-lsp` from `PATH` if the latest release cannot be fetched or downloaded
 
 If you prefer to install it manually:
 
@@ -41,6 +45,9 @@ go install github.com/juev/hledger-lsp@latest
 # Or download from releases
 # https://github.com/juev/hledger-lsp/releases
 ```
+
+After manual installation, set `lsp.hledger-lsp.binary.path` explicitly. Binaries found
+on `PATH` are used as a fallback when automatic download is unavailable.
 
 ## Configuration
 
